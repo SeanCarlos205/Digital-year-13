@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {% if title %}
-        <title>Flask Blog - {{ title}} </title>
-    {% else %}
-        <title>Flask Blog</title>
-
-    {% endif %}
-</head>
-
-<body>
-
+{% extends "layout.html" %}
+{% block content %}
     {% for posts in posts %}
         <h1> {{ posts.title }} </h1>
         <p> By {{ posts.author }} on {{ posts.date_posted }} </p>
         <p> {{ posts.content }} </p>
     {% endfor %}
-
-</body>
-</html>
+{% endblock content %}
