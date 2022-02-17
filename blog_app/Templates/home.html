@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    {% if title %}
+        <title>Flask Blog - {{ title}} </title>
+    {% else %}
+        <title>Flask Blog</title>
+
+    {% endif %}
 </head>
 
 <body>
 
-<h1>Home</h1>
-<p>My first paragraph in home.</p>
+    {% for posts in posts %}
+        <h1> {{ posts.title }} </h1>
+        <p> By {{ posts.author }} on {{ posts.date_posted }} </p>
+        <p> {{ posts.content }} </p>
+    {% endfor %}
 
 </body>
 </html>
