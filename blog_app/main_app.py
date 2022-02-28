@@ -52,7 +52,7 @@ def register():
 #Route for login page
 @app.route("/login")
 def login():
-    form = Loginform()
+    form = LoginForm()
     return render_template('login.html', title='Login', form='forms')
 
 if __name__ =='__main__':
