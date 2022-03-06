@@ -1,9 +1,25 @@
+from datetime import datetime
 from flask import Flask, render_template, url_for, flash, redirect
+from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
 
-app = Flask(__name__)
 
+app = Flask(__name__)
 app.config['SECRET_KEY'] = '292ecfd3114ae58cffef6b2febc720e5'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.string(20), unique=True, nullable=False)
+    email = db.Column(db.string(20), unique=True, nullable=False)
+    image_file = db.Column(db.string(20), nullable=False, default='default.jpg')    
+    password = db.Column(db.string(60), nullable=False)
+    
+    def __repr__(self):
+        return f"User('{self.username}','{self.email}','{self.image_file}')"
 
 posts = [
     
@@ -61,7 +77,7 @@ def login():
             flash('You have been logged in!', 'success')
             return redirect(url_for(home))
         else:
-            flash('Login failed. Please check your username and password', 'danger')
+            flash('Login failed. Please check your username and password', 'danger6')
     return render_template('login.html', title='Login', form='forms')
 
 if __name__ =='__main__':
